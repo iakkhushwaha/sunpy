@@ -115,7 +115,7 @@ def test_truncation_timerange(eve_test_ts):
             eve_test_ts.time_range.split(3)[1])
     # Check when the timerange is in str
     assert truncated_1.time_range == truncated_1.meta.time_range == TimeRange('2016-06-10 00:02:00', '2016-06-10 00:06:00')    # Check when the timerange does not overlaps with the data timerange    
-    with pytest.raises(ValueError, match="Provided TimeRange is not within the bounds of TimeSeries TimeRange"):
+    with pytest.raises(ValueError, match="Provided timerange is not within the bounds of the timeseries"):
         eve_test_ts.truncate(TimeRange('2012-06-07 05:00', '2012-06-07 06:30'))
     
 
@@ -236,7 +236,7 @@ def test_truncated_outside_tr_ts(truncated_new_tr_all_before_ts,
     truncated_before, time_range_before = truncated_new_tr_all_before_ts
     truncated_after, time_range_after = truncated_new_tr_all_after_ts
 
-    message = "Provided TimeRange is not within the bounds of TimeSeries TimeRange"
+    message = "Provided timerange is not within the bounds of the timeseries"
     with pytest.raises(ValueError, match=message):
         truncated_before.truncate(time_range_before)
     with pytest.raises(ValueError, match=message):
@@ -482,7 +482,7 @@ def test_empty_ts_invalid_peek(generic_ts):
     # Truncate a timeseries so it's empty
     a = generic_ts.time_range.start - TimeDelta(2*u.day)
     b = generic_ts.time_range.start - TimeDelta(1*u.day)
-    with pytest.raises(ValueError, match="Provided TimeRange is not within the bounds of TimeSeries TimeRange"):
+    with pytest.raises(ValueError, match="Provided timerange is not within the bounds of the timeseries"):
         generic_ts.truncate(TimeRange(a, b))
 
 
