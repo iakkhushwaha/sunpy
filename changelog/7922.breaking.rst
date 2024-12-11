@@ -1,1 +1,1 @@
-Adds Support for `TimeSeries.truncate` for out of bounds/partial TimeRanges
+`sunpy.timeseries.TimeSeries.truncate` now will error if one attempts to truncate with an out of bounds timerange.
