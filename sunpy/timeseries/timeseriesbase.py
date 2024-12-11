@@ -530,6 +530,7 @@ class GenericTimeSeries:
         `~sunpy.timeseries.TimeSeries`
             A new `~sunpy.timeseries.TimeSeries` with only the selected times.
         """
+        is_int = False
         # Evaluate inputs
         # If given strings, then use to create a sunpy.time.timerange.TimeRange
         # for the SunPy text date parser.
