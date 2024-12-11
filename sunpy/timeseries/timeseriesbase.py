@@ -510,7 +510,7 @@ class GenericTimeSeries:
                                  TimeSeriesMetaData(copy.copy(self.meta.metadata)),
                                  copy.copy(self.units))
 
-    def truncate(self, a, b=None, step=None):
+    def truncate(self, a, b=None, int=None):
         """
         Returns a truncated version of the TimeSeries object.
 
@@ -521,7 +521,7 @@ class GenericTimeSeries:
         b : `str` or `int`, optional
             If specified, the end time of the time range in some format recognized by pandas, or a index integer.
             Defaults to `None`.
-        step : `int`, optional
+        int : `int`, optional
             If specified, the integer indicating the slicing intervals.
             Defaults to `None`.
 
@@ -545,10 +545,11 @@ class GenericTimeSeries:
             # Otherwise we already have the values
             start = a
             end = b
+            is_int = True
 
         min_time, max_time = self._data.index.min(), self._data.index.max()
         # Check if the timerange overlaps with the data timerange
-        if not (isinstance(a ,int) and isinstance(b , int)):
+        if not is_int:
             if min_time >= start and max_time <= end:
                 pass
             elif not ((min_time <= start <= max_time) or (min_time <= end <= max_time)):
@@ -556,7 +557,7 @@ class GenericTimeSeries:
                 raise ValueError(message)
 
         # If an interval integer was given then use in truncation.
-        truncated_data = self._data.sort_index()[start:end:step]
+        truncated_data = self._data.sort_index()[start:end:int]
 
         # Truncate the metadata
         # Check there is data still
