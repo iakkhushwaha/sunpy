@@ -234,8 +234,7 @@ def truncated_new_tr_all_after_ts(concatenate_multi_files_ts):
     return truncated, tr
 
 
-def test_truncated_outside_tr_ts(truncated_new_tr_all_before_ts,
-                                 truncated_new_tr_all_after_ts):
+def test_truncated_outside_tr_ts(truncated_new_tr_all_before_ts, truncated_new_tr_all_after_ts):
     truncated_before, time_range_before = truncated_new_tr_all_before_ts
     truncated_after, time_range_after = truncated_new_tr_all_after_ts
 
