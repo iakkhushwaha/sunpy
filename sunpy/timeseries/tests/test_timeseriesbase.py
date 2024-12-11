@@ -245,6 +245,27 @@ def test_truncated_outside_tr_ts(truncated_new_tr_all_before_ts, truncated_new_t
         truncated_after.truncate(time_range_after)
 
 
+@pytest.fixture
+def truncated_new_tr_partially_ts(esp_test_ts):
+    start_time_outside = esp_test_ts.time_range.start - TimeDelta(1*u.min)
+    center_time = esp_test_ts.time_range.center
+    end_time_outside = esp_test_ts.time_range.end + TimeDelta(1*u.min)
+
+    tr_1 = TimeRange(start_time_outside, center_time)
+    tr_2 = TimeRange(center_time, end_time_outside)
+    return tr_1 , tr_2
+
+def test_truncated_new_tr_partially_ts(esp_test_ts, truncated_new_tr_partially_ts):
+
+    tr_1, tr_2 = truncated_new_tr_partially_ts
+    truncated = copy.deepcopy(esp_test_ts)
+    truncated_1 = truncated.truncate(tr_1)
+    truncated_2 = truncated.truncate(tr_2)
+    # Check when TimeRange lie partially inside Timeseries 
+    assert truncated_1.time_range == truncated_1.meta.time_range ==  truncated.time_range.split()[0]
+    assert truncated_2.time_range == truncated_2.meta.time_range ==  truncated.time_range.split()[1]
+
+
 def test_extraction(eve_test_ts):
     cmlon = eve_test_ts.extract('CMLon')
     # Test there's only one column in the data, metadata and units
