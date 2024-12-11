@@ -1,0 +1,1 @@
+Adds Support for `TimeSeries.truncate` for out of bounds/partial TimeRanges
