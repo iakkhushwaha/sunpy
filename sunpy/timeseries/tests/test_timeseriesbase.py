@@ -253,7 +253,7 @@ def truncated_new_tr_partially_ts(esp_test_ts):
 
     tr_1 = TimeRange(start_time_outside, center_time)
     tr_2 = TimeRange(center_time, end_time_outside)
-    return tr_1 , tr_2
+    return tr_1, tr_2
 
 def test_truncated_new_tr_partially_ts(esp_test_ts, truncated_new_tr_partially_ts):
 
