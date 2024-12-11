@@ -221,7 +221,7 @@ def truncated_new_tr_all_before_ts(concatenate_multi_files_ts):
     b = concatenate_multi_files_ts.meta.metadata[0][0].start - TimeDelta(1*u.day)
     tr = TimeRange(a, b)
     truncated = copy.deepcopy(concatenate_multi_files_ts)
-    return truncated , tr
+    return truncated, tr
 
 
 @pytest.fixture
@@ -231,7 +231,7 @@ def truncated_new_tr_all_after_ts(concatenate_multi_files_ts):
     b = concatenate_multi_files_ts.meta.metadata[-1][0].end + TimeDelta(2*u.day)
     tr = TimeRange(a, b)
     truncated = copy.deepcopy(concatenate_multi_files_ts)
-    return truncated , tr
+    return truncated, tr
 
 
 def test_truncated_outside_tr_ts(truncated_new_tr_all_before_ts,
