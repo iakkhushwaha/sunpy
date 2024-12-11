@@ -553,7 +553,7 @@ class GenericTimeSeries:
         if not is_int:
             if min_time >= start and max_time <= end:
                 pass
-            elif not ((min_time <= start <= max_time) or (min_time <= end <= max_time)):
+            elif (start <= end <= min_time or max_time <= start <= end):
                 message = "Provided timerange is not within the bounds of the timeseries"
                 raise ValueError(message)
 
