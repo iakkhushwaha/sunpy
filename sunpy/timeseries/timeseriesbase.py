@@ -122,6 +122,8 @@ class GenericTimeSeries:
             # Should have a list of 3-tuples giving a complex metadata list.
             self.meta = meta
 
+        if isinstance(data.index[0], Time):
+            self._data.index = pd.to_datetime(self._data.index.map(lambda x: x.to_datetime()))
         if units is None:
             self.units = {}
         else:
@@ -588,6 +590,7 @@ class GenericTimeSeries:
         `~sunpy.timeseries.TimeSeries`
             A new `~sunpy.timeseries.TimeSeries` with only the selected column.
         """
+        column_name = list(column_name)
         data = self._data[column_name].dropna()
         units = {column_name: self.units[column_name] for index, column_name in enumerate(column_name)}
         # Build generic TimeSeries object and sanatise metadata and units.
